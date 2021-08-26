@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:clinica/pages/perfilcitaempleado.dart';
 import 'package:clinica/pages/perfilreceta.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +8,9 @@ import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/requests/configurl.dart';
 import 'package:clinica/main.dart';
 
-import 'citaadd.dart';
-import 'menuadministrador.dart';
-
 
 String Id = '';
 String Name = '';
-
 
 Future<List<Receta>> ListarReceta(http.Client client, Id, Name) async {
   final response = await http.post(Uri.parse(Url + 'FindRecetaId.php'), body: {
@@ -34,22 +29,26 @@ class BusquedaRecetas extends StatelessWidget {
   String idUsuario = '';
   String nameUsuario = '';
 
-
   BusquedaRecetas({required this.idUsuario, nameUsuario});
   factory BusquedaRecetas.Asignar(Map JsonMap) {
     Id = JsonMap['idUsuario'];
     Name = JsonMap['nameUsuario'];
-    return BusquedaRecetas(idUsuario: JsonMap[Id],nameUsuario: JsonMap[Name]);
+    return BusquedaRecetas(idUsuario: JsonMap[Id], nameUsuario: JsonMap[Name]);
   }
 
   @override
   Widget build(BuildContext context) {
     Id = idUsuario;
-    Name=nameUsuario;
+    Name = nameUsuario;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Recetas medicas' + Name,
       theme: ThemeData(primarySwatch: Colors.cyan),
+      routes: <String, WidgetBuilder>{
+       // "/Personal": (BuildContext context) => ListPersonalAtencion(),
+       // "/Cita": (BuildContext context) => ListCitas(),
+        //"/Menu": (BuildContext context) => MenuAdministrador(),
+      },
       home: MyHomePage(
         title: 'Recetas',
       ),
@@ -77,9 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
         title: Text('Recetas médicas'),
-
       ),
       body: getInfo(context),
       floatingActionButton: FloatingActionButton(
@@ -93,7 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: AwesomeBottomNav(
         icons: [
-
           Icons.home_rounded,
           Icons.medical_services_rounded,
           Icons.brightness_7_rounded,
@@ -101,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
           // Icons.settings_outlined,
         ],
         highlightedIcons: [
-
           Icons.home_rounded,
           Icons.medical_services_rounded,
           Icons.brightness_7_rounded,
@@ -133,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
 Widget getInfo(BuildContext context) {
   return FutureBuilder(
-    future: ListarReceta(http.Client(), Id,Name),
+    future: ListarReceta(http.Client(), Id, Name),
     builder: (BuildContext context, AsyncSnapshot snapshot) {
       switch (snapshot.connectionState) {
         case ConnectionState.waiting:
@@ -144,9 +139,9 @@ Widget getInfo(BuildContext context) {
           return snapshot.data != null
               ? VistaRecetas(recetas: snapshot.data)
               : Text(
-            'No hay datos',
-            style: TextStyle(color: Colors.black),
-          );
+                  'No hay datos',
+                  style: TextStyle(color: Colors.black),
+                );
 
         default:
           return Text('Actualizar');
@@ -177,12 +172,13 @@ class VistaRecetas extends StatelessWidget {
               padding: EdgeInsets.all(5.0),
               width: 140,
               height: 180,
-              child: Text(recetas[posicion].CentroAsistencial+ " Fecha "+recetas[posicion].Fecha),
+              child: Text(recetas[posicion].CentroAsistencial +
+                  " Fecha " +
+                  recetas[posicion].Fecha),
             ),
-            title: Text(
-                "Codigo de la receta " + recetas[posicion].CodigoReceta),
-            subtitle: Text("Dr: " +
-                recetas[posicion].NombreMedico),
+            title:
+                Text("Codigo de la receta " + recetas[posicion].CodigoReceta),
+            subtitle: Text("Dr: " + recetas[posicion].NombreMedico),
             trailing: Container(
               width: 120,
               height: 40,
@@ -190,7 +186,7 @@ class VistaRecetas extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(recetas[posicion].EstadoReceta),
               color: recetas[posicion].EstadoReceta == 'No reclamada'
-                  ? Colors.red
+                  ? Colors.redAccent
                   : Colors.lightGreenAccent,
             ),
           );
