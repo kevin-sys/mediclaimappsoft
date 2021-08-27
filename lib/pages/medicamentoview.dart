@@ -78,6 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings_outlined,
@@ -85,6 +86,7 @@ class _MyHomePageState extends State<MyHomePage> {
         highlightedIcons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings,

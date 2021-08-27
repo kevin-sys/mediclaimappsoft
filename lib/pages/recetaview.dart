@@ -8,6 +8,8 @@ import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/requests/configurl.dart';
 import 'package:clinica/main.dart';
 
+import 'menu.dart';
+
 
 String Id = '';
 String Name = '';
@@ -42,12 +44,12 @@ class BusquedaRecetas extends StatelessWidget {
     Name = nameUsuario;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Recetas medicas' + Name,
+      title: 'Recetas medicas' + Id,
       theme: ThemeData(primarySwatch: Colors.cyan),
       routes: <String, WidgetBuilder>{
        // "/Personal": (BuildContext context) => ListPersonalAtencion(),
        // "/Cita": (BuildContext context) => ListCitas(),
-        //"/Menu": (BuildContext context) => MenuAdministrador(),
+        "/Ajustes": (BuildContext context) => MenuAdministrador(idUsuario: Id),
       },
       home: MyHomePage(
         title: 'Recetas',
@@ -92,6 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings_outlined,
@@ -99,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
         highlightedIcons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings,
@@ -113,8 +117,12 @@ class _MyHomePageState extends State<MyHomePage> {
               Navigator.pushNamed(context, "/ListadoPaciente");
             }
             if (selectedIndex == 3) {
-              Navigator.pushNamed(context, "/ListadoPersonal");
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return MenuAdministrador(
+                    idUsuario: Id);
+              }));
             }
+
           });
         },
         bodyBgColor: _bgColor,

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:clinica/pages/habitosview.dart';
 import 'package:clinica/pages/login.dart';
+import 'package:clinica/pages/menu.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -18,7 +19,7 @@ class SplashScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: HabitosView(),
+      home: MyHomePage(),
       debugShowCheckedModeBanner: false,
     );
   }
@@ -34,18 +35,17 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     Timer(
-        Duration(seconds: 3),
+        Duration(seconds: 1),
         () => Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => LoginApp())));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        color: Colors.lightBlueAccent,
-        child: LogoApp());
+    return Container(color: Colors.lightBlueAccent, child: LogoApp());
   }
 }
+
 Widget LogoApp() {
   return LayoutBuilder(
     builder: (context, constraints) {

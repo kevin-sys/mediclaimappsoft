@@ -49,6 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         icons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings_outlined,
@@ -56,6 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         highlightedIcons: [
           Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings,
@@ -148,8 +150,10 @@ class ItemList extends StatelessWidget {
                 child: new Card(
                   child: Container(
                     //color: Colors.black,
+
                     height: 100.3,
                     child: new Card(
+
                       color: Colors
                           .primaries[Random().nextInt(Colors.primaries.length)],
                       child: Column(
@@ -187,6 +191,7 @@ class ItemList extends StatelessWidget {
                         ],
                       ),
                     ),
+
                   ),
                 ),
               ),
