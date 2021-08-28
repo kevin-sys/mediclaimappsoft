@@ -21,7 +21,7 @@ class MenuAdministrador extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Menu Principal'+ Id,
+      title: 'Ajustes'+ Id,
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,

@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:clinica/pages/habitosview.dart';
 import 'package:clinica/pages/login.dart';
 import 'package:clinica/pages/menu.dart';
+import 'package:clinica/pages/recordatorioview.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
@@ -19,7 +20,7 @@ class SplashScreen extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.cyan,
       ),
-      home: MyHomePage(),
+      home: RecordatorioView(),
       debugShowCheckedModeBanner: false,
     );
   }
