@@ -61,7 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
 
-        title: Text('Medicamentos'),
+        title: Text("Mis medicamentos",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+            textAlign: TextAlign.left)
 
       ),
       body: getInfo(context),
@@ -157,9 +159,9 @@ class VistaMedicamentos extends StatelessWidget {
                           medicamentos: medicamentos, idperfilmedicamento: posicion)));
             },
             leading: Container(
-              padding: EdgeInsets.all(5.0),
-              width: 50,
-              height: 50,
+              padding: EdgeInsets.all(1.0),
+              width: 75,
+              height: 75,
               child: Image.network(medicamentos[posicion].Foto),
             ),
             title: Text(medicamentos[posicion].Nombre),
@@ -172,7 +174,7 @@ class VistaMedicamentos extends StatelessWidget {
               child: Text(medicamentos[posicion].Tipo),
               color: medicamentos[posicion].Tipo == 'Activo'
                   ? Colors.lightGreenAccent
-                  : Colors.white,
+                  : Colors.purpleAccent,
             ),
           );
         });

@@ -17,7 +17,9 @@ class PerfilReceta extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.cyan),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Detalles de la receta médica'),
+          title: Text("Descripción de la receta medica",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+              textAlign: TextAlign.left)
         ),
         body: ListView(children: [
           Container(
@@ -236,16 +238,17 @@ class PerfilReceta extends StatelessWidget {
                                       fontSize: 20, color: Colors.cyan)),
                               Row(
                                 mainAxisAlignment:
-                                MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   Column(
                                     children: [
                                       SizedBox(
                                         height: 5,
                                       ),
-                                      Text("El estado de su receta es: "+
-                                        perfilrecetas[idperfilreceta]
-                                            .EstadoReceta,
+                                      Text(
+                                        "El estado de su receta es: " +
+                                            perfilrecetas[idperfilreceta]
+                                                .EstadoReceta,
                                       ),
                                     ],
                                   ),
@@ -261,17 +264,29 @@ class PerfilReceta extends StatelessWidget {
                                 child: Text(
                                     perfilrecetas[idperfilreceta].Observacion),
                               ),
-
                               SizedBox(
                                 height: 10,
                               ),
-                              ElevatedButton(
+                              ButtonTheme(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                child: RaisedButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text('Volver al listado',
-                                      style: TextStyle(
-                                          fontSize: 20, color: Colors.white))),
+                                  child: SizedBox(
+                                    width: 350,
+                                    height: 30,
+                                    child: Center(
+                                      child: Text("Volver a mis recetas",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white),
+                                          textAlign: TextAlign.left),
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         )

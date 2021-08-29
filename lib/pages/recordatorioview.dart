@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:clinica/pages/recordatorioadd.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -61,16 +62,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recordatorio-MediClaim'),
+        title: Text("Mis recordatorios",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+            textAlign: TextAlign.left),
         actions: [
           IconButton(
               tooltip: 'Nuevo recordatorio',
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add,
+                color: Colors.black),
               onPressed: () {
-                /*Navigator.push(
+                Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddPaciente()),
-                );*/
+                  MaterialPageRoute(builder: (context) => AddPersonalAtencion()),
+                );
               }),
         ],
       ),

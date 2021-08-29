@@ -14,12 +14,13 @@ class PerfilMedicamento extends StatelessWidget {
     contextoMedicamento = context;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Detalles del medicamento',
+      title: 'Descripción del medicamento',
       theme: ThemeData(primarySwatch: Colors.cyan),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Medicamento'),
-        ),
+            title: Text("Descripción del medicamento",
+                style: TextStyle(fontSize: 20, color: Colors.black),
+                textAlign: TextAlign.left)),
         body: ListView(children: [
           Container(
             padding: EdgeInsets.fromLTRB(10, 50, 10, 0),
@@ -230,13 +231,27 @@ class PerfilMedicamento extends StatelessWidget {
                               SizedBox(
                                 height: 10,
                               ),
-                              ElevatedButton(
+
+                              ButtonTheme(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                child: RaisedButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text('Volver a mis medicamentos',
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.white))),
+                                  child: SizedBox(
+                                    width: 350,
+                                    height: 30,
+                                    child: Center(
+                                      child: Text("Volver a mis medicamentos",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white),
+                                          textAlign: TextAlign.left),
+                                    ),
+                                  ),
+                                ),
+                              )
                             ],
                           ),
                         )

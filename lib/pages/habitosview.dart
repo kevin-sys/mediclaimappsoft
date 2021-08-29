@@ -42,7 +42,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Estilos de vida saludables'),
+        title: Text("Estilos de vida saludables",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+            textAlign: TextAlign.left)
       ),
       body: HabitosVista(),
       bottomNavigationBar: AwesomeBottomNav(

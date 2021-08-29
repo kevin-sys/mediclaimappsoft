@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
           padding: EdgeInsets.all(16.0),
           child: ListView(
             children: <Widget>[
-              SizedBox(height: 120),
+              SizedBox(height: 50),
               Card(
                 elevation: 0,
                 color: Colors.white,
@@ -136,6 +136,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 15),
                         TextField(
                           controller: Usuario,
+                          keyboardType: TextInputType.emailAddress,
                           decoration: InputDecoration(
                               filled: true,
                               icon: Icon(Icons.person),
@@ -154,6 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 16),
                         TextField(
                           controller: Pass,
+                          keyboardType: TextInputType.visiblePassword,
                           obscureText: true,
                           decoration: InputDecoration(
                               filled: true,
@@ -168,8 +170,8 @@ class _LoginPageState extends State<LoginPage> {
                                 },
                               )),
                         ),
-                        SizedBox(height: 16),
-                        ElevatedButton(
+                        SizedBox(height: 15),
+                        /*  ElevatedButton(
                           onPressed: () {
                             if (Usuario.text.isNotEmpty &&
                                 Pass.text.isNotEmpty) {
@@ -182,18 +184,41 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text('Iniciar Sesión',
                               style: TextStyle(
                                   fontSize: 20.0, color: Colors.black)),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          mensaje,
-                          style: TextStyle(fontSize: 20.0, color: Colors.black),
+                        ),*/
+                        ButtonTheme(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(7.0)),
+                          child: RaisedButton(
+                            onPressed: () {
+                              if (Usuario.text.isNotEmpty &&
+                                  Pass.text.isNotEmpty) {
+                                _login();
+                              } else {
+                                cajaerror(context,
+                                    'Todos los campos son obligatorios');
+                              }
+                            },
+                            child: SizedBox(
+                              width: 250,
+                              height: 40,
+                              child: Center(
+                                child: Text("Iniciar Sesión",
+                                    style: TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                    textAlign: TextAlign.left),
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(height: 5),
                         Text(
                           "¿Olvidó su contraseña?",
                           style: TextStyle(fontSize: 15.0, color: Colors.blue),
                         ),
-
+                        Text(
+                          mensaje,
+                          style: TextStyle(fontSize: 20.0, color: Colors.black),
+                        ),
                       ],
                     ),
                   )),

@@ -78,7 +78,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Recetas médicas'),
+        title: Text("Mis recetas médicas",
+            style: TextStyle(fontSize: 20, color: Colors.black),
+            textAlign: TextAlign.left),
       ),
       body: getInfo(context),
       floatingActionButton: FloatingActionButton(
