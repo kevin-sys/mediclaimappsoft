@@ -1,5 +1,7 @@
 import 'dart:convert';
 import 'package:clinica/pages/perfilmedicamento.dart';
+import 'package:clinica/pages/recetaview.dart';
+import 'package:clinica/pages/recordatorioview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,7 +10,9 @@ import 'package:clinica/models/medicamento.dart';
 import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/requests/configurl.dart';
 
-  Future<List<Medicamento>> ListarMedicamentos(http.Client client) async {
+import 'menu.dart';
+
+Future<List<Medicamento>> ListarMedicamentos(http.Client client) async {
   final response = await http.get(Uri.parse(Url + 'GetDataMedicamento.php'));
   return compute(pasarmedicamentoalista, response.body);
 }
@@ -31,7 +35,9 @@ class MedicamentoView extends StatelessWidget {
       title: 'Medicamentos',
       theme: ThemeData(primarySwatch: Colors.cyan),
       routes: <String, WidgetBuilder>{
-        //"/Personal": (BuildContext context) => ListPersonalAtencion(),
+        "/Receta": (BuildContext context) => BusquedaRecetas(idUsuario: '',),
+        "/Ajustes": (BuildContext context) => MenuAdministrador(idUsuario: ''),
+        "/Recordatorio": (BuildContext context) => RecordatorioView(),
       },
       home: MyHomePage(
         title: 'Medicamentos',
@@ -60,12 +66,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        title: Text("Mis medicamentos",
-            style: TextStyle(fontSize: 20, color: Colors.black),
-            textAlign: TextAlign.left)
-
-      ),
+          title: Text("Mis medicamentos",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+              textAlign: TextAlign.left)),
       body: getInfo(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -78,16 +81,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: AwesomeBottomNav(
         icons: [
-          Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.home_rounded,
           Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings_outlined,
         ],
         highlightedIcons: [
-          Icons.home_rounded,
           Icons.medical_services_rounded,
+          Icons.home_rounded,
           Icons.article_outlined,
           Icons.brightness_7_rounded,
 
@@ -97,13 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             selectedIndex = value;
             if (selectedIndex == 1) {
-              Navigator.pushNamed(context, "/Menu");
+              Navigator.pushNamed(context, "/Receta");
             }
             if (selectedIndex == 2) {
-              Navigator.pushNamed(context, "/ListadoPaciente");
+              Navigator.pushNamed(context, "/Recordatorio");
             }
             if (selectedIndex == 3) {
-              Navigator.pushNamed(context, "/ListadoPersonal");
+              Navigator.pushNamed(context, "/Ajustes");
             }
           });
         },
@@ -129,9 +132,9 @@ Widget getInfo(BuildContext context) {
           return snapshot.data != null
               ? VistaMedicamentos(medicamentos: snapshot.data)
               : Text(
-            'No hay datos',
-            style: TextStyle(color: Colors.black),
-          );
+                  'No hay datos',
+                  style: TextStyle(color: Colors.black),
+                );
 
         default:
           return Text('Actualizar');
@@ -156,7 +159,8 @@ class VistaMedicamentos extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (BuildContext context) => PerfilMedicamento(
-                          medicamentos: medicamentos, idperfilmedicamento: posicion)));
+                          medicamentos: medicamentos,
+                          idperfilmedicamento: posicion)));
             },
             leading: Container(
               padding: EdgeInsets.all(1.0),

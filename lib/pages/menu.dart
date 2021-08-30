@@ -3,37 +3,43 @@ import 'dart:math';
 
 import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/pages/recetaview.dart';
+import 'package:clinica/pages/recordatorioview.dart';
 import 'package:flutter/material.dart';
 
-
+import 'habitosview.dart';
+import 'login.dart';
+import 'medicamentoview.dart';
 
 String Id = '';
 String Name = '';
+
 class MenuAdministrador extends StatelessWidget {
-  String idUsuario ;
+  String idUsuario;
   MenuAdministrador({required this.idUsuario, nameUsuario});
   factory MenuAdministrador.Asignar(Map JsonMap) {
     Id = JsonMap['idUsuario'];
     Name = JsonMap['nameUsuario'];
-    return MenuAdministrador(idUsuario: JsonMap[Id], nameUsuario: JsonMap[Name]);
+    return MenuAdministrador(
+        idUsuario: JsonMap[Id], nameUsuario: JsonMap[Name]);
   }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Ajustes'+ Id,
+      title: 'Ajustes' + Id,
       theme: ThemeData(
         primarySwatch: Colors.cyan,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       routes: <String, WidgetBuilder>{
-         "/Receta": (BuildContext context) => BusquedaRecetas(idUsuario: '',),
-       /* "/Personal": (BuildContext context) => AddPersonalAtencion(),
-        "/Cita": (BuildContext context) => AddCita(),
-        "/ListadoPaciente": (BuildContext context) => ListPaciente(),
-        "/ListadoPersonal": (BuildContext context) => ListPersonalAtencion(),
-        "/ListadoCitas": (BuildContext context) => ListCitas(),
-        "/ListadoUsuario": (BuildContext context) => ListUsuario(),*/
+        "/Receta": (BuildContext context) => BusquedaRecetas(
+              idUsuario: '',
+            ),
+        "/Medicamento": (BuildContext context) => MedicamentoView(),
+        "/Recordatorio": (BuildContext context) => RecordatorioView(),
+        "/Habitos": (BuildContext context) => HabitosView(),
+        "/Login": (BuildContext context) => LoginApp(),
+
       },
       home: ExampleHomePage(),
     );
@@ -131,13 +137,13 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
                               borderRadius: BorderRadius.circular(30.0)),
                           child: RaisedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, "/Paciente");
+                              Navigator.pushNamed(context, "/Habitos");
                             },
                             child: SizedBox(
                               width: 400,
                               height: 40,
                               child: Center(
-                                child: Text("Información",
+                                child: Text("Estilos de vida saludable",
                                     style: TextStyle(
                                         fontSize: 20, color: Colors.white),
                                     textAlign: TextAlign.left),
@@ -250,7 +256,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          // Add your onPressed code here!
+          Navigator.pushNamed(context, "/Login");
         },
         child: const Icon(Icons.logout),
         backgroundColor: Colors.red,
@@ -261,7 +267,6 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
           Icons.home_rounded,
           Icons.medical_services_rounded,
           Icons.article_outlined,
-
 
           // Icons.settings_outlined,
         ],
@@ -278,15 +283,14 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
             selectedIndex = value;
             if (selectedIndex == 1) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return BusquedaRecetas(
-                    idUsuario: Id);
+                return BusquedaRecetas(idUsuario: Id);
               }));
             }
             if (selectedIndex == 2) {
-              Navigator.pushNamed(context, "/Receta");
+              Navigator.pushNamed(context, "/Medicamento");
             }
             if (selectedIndex == 3) {
-              Navigator.pushNamed(context, "/ListadoPersonal");
+              Navigator.pushNamed(context, "/Recordatorio");
             }
           });
         },

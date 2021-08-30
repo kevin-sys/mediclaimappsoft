@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 
 import 'dart:math';
+
+import 'menu.dart';
 
 class HabitosView extends StatelessWidget {
   @override
@@ -16,7 +17,7 @@ class HabitosView extends StatelessWidget {
         //"/Personal": (BuildContext context) => ListPersonalAtencion(),
       },
       home: MyHomePage(
-        title: 'Estilos de vida saludables',
+        title: 'Estilos de vida saludable',
       ),
     );
   }
@@ -42,47 +43,29 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Estilos de vida saludables",
-            style: TextStyle(fontSize: 20, color: Colors.black),
-            textAlign: TextAlign.left)
+          title: Text("Estilos de vida saludable",
+              style: TextStyle(fontSize: 20, color: Colors.black),
+              textAlign: TextAlign.left),
+          leading: Container(
+      padding: EdgeInsets.all(5.0),
+      width: 50,
+      height: 50,
+      child: IconButton(
+          tooltip: 'Ir a ajustes',
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => MenuAdministrador(idUsuario: '',)),
+            );
+          }),
+    ),
       ),
       body: HabitosVista(),
-      bottomNavigationBar: AwesomeBottomNav(
-        icons: [
-          Icons.home_rounded,
-          Icons.medical_services_rounded,
-          Icons.article_outlined,
-          Icons.brightness_7_rounded,
-
-          // Icons.settings_outlined,
-        ],
-        highlightedIcons: [
-          Icons.home_rounded,
-          Icons.medical_services_rounded,
-          Icons.article_outlined,
-          Icons.brightness_7_rounded,
-
-          // Icons.settings,
-        ],
-        onTapped: (int value) {
-          setState(() {
-            selectedIndex = value;
-            if (selectedIndex == 1) {
-              Navigator.pushNamed(context, "/Menu");
-            }
-            if (selectedIndex == 2) {
-              Navigator.pushNamed(context, "/ListadoPaciente");
-            }
-            if (selectedIndex == 3) {
-              Navigator.pushNamed(context, "/ListadoPersonal");
-            }
-          });
-        },
-        bodyBgColor: _bgColor,
-        highlightColor: Color(0xFF00D0D0),
-        navFgColor: Colors.black,
-        navBgColor: Color(0xFF00D0D0),
-      ),
     );
   }
 }
@@ -155,7 +138,6 @@ class ItemList extends StatelessWidget {
 
                     height: 100.3,
                     child: new Card(
-
                       color: Colors
                           .primaries[Random().nextInt(Colors.primaries.length)],
                       child: Column(
@@ -193,7 +175,6 @@ class ItemList extends StatelessWidget {
                         ],
                       ),
                     ),
-
                   ),
                 ),
               ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:clinica/pages/perfilreceta.dart';
+import 'package:clinica/pages/recordatorioview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -8,6 +9,7 @@ import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/requests/configurl.dart';
 import 'package:clinica/main.dart';
 
+import 'medicamentoview.dart';
 import 'menu.dart';
 
 
@@ -16,7 +18,8 @@ String Name = '';
 
 Future<List<Receta>> ListarReceta(http.Client client, Id, Name) async {
   final response = await http.post(Uri.parse(Url + 'FindRecetaId.php'), body: {
-    "IdentificacionPaciente": Id,
+    //"IdentificacionPaciente": Id,
+    "IdentificacionPaciente": "1065853708",
   });
   return compute(pasarreceta, response.body);
 }
@@ -47,8 +50,8 @@ class BusquedaRecetas extends StatelessWidget {
       title: 'Recetas medicas' + Id,
       theme: ThemeData(primarySwatch: Colors.cyan),
       routes: <String, WidgetBuilder>{
-       // "/Personal": (BuildContext context) => ListPersonalAtencion(),
-       // "/Cita": (BuildContext context) => ListCitas(),
+       "/Recordatorio": (BuildContext context) => RecordatorioView(),
+        "/Medicamento": (BuildContext context) => MedicamentoView(),
         "/Ajustes": (BuildContext context) => MenuAdministrador(idUsuario: Id),
       },
       home: MyHomePage(
@@ -113,10 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             selectedIndex = value;
             if (selectedIndex == 1) {
-              Navigator.pushNamed(context, "/Menu");
+              Navigator.pushNamed(context, "/Medicamento");
             }
             if (selectedIndex == 2) {
-              Navigator.pushNamed(context, "/ListadoPaciente");
+              Navigator.pushNamed(context, "/Recordatorio");
             }
             if (selectedIndex == 3) {
               Navigator.push(context, MaterialPageRoute(builder: (context) {

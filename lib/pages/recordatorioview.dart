@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:clinica/pages/recetaview.dart';
 import 'package:clinica/pages/recordatorioadd.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,9 @@ import 'package:clinica/models/recordatorio.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:awesome_bottom_navigation/awesome_bottom_navigation.dart';
 import 'package:clinica/requests/configurl.dart';
+
+import 'medicamentoview.dart';
+import 'menu.dart';
 
 Future<List<Recordatorio>> ListarRecordatorio(http.Client client) async {
   final response = await http.get(Uri.parse(Url + 'GetDataRecordatorio.php'));
@@ -33,7 +37,9 @@ class RecordatorioView extends StatelessWidget {
       title: 'Recordatorio',
       theme: ThemeData(primarySwatch: Colors.cyan),
       routes: <String, WidgetBuilder>{
-        //"/Personal": (BuildContext context) => ListPersonalAtencion(),
+        "/Receta": (BuildContext context) => BusquedaRecetas(idUsuario: '',),
+        "/Ajustes": (BuildContext context) => MenuAdministrador(idUsuario: ''),
+        "/Medicamento": (BuildContext context) => MedicamentoView(),
       },
       home: MyHomePage(
         title: 'Recordatorio',
@@ -90,17 +96,17 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       bottomNavigationBar: AwesomeBottomNav(
         icons: [
+          Icons.article_outlined,
           Icons.home_rounded,
           Icons.medical_services_rounded,
-          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings_outlined,
         ],
         highlightedIcons: [
+          Icons.article_outlined,
           Icons.home_rounded,
           Icons.medical_services_rounded,
-          Icons.article_outlined,
           Icons.brightness_7_rounded,
 
           // Icons.settings,
@@ -109,13 +115,13 @@ class _MyHomePageState extends State<MyHomePage> {
           setState(() {
             selectedIndex = value;
             if (selectedIndex == 1) {
-              Navigator.pushNamed(context, "/Menu");
+              Navigator.pushNamed(context, "/Receta");
             }
             if (selectedIndex == 2) {
-              Navigator.pushNamed(context, "/ListadoPaciente");
+              Navigator.pushNamed(context, "/Medicamento");
             }
             if (selectedIndex == 3) {
-              Navigator.pushNamed(context, "/ListadoPersonal");
+              Navigator.pushNamed(context, "/Ajustes");
             }
           });
         },
